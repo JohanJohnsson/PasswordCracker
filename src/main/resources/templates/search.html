@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sök Hash</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+            max-width: 600px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="text-center">
+        <h1>Sök Lösenord från Hash</h1>
+    </header>
+    <main>
+        <form th:action="@{/search-hash}" method="post">
+            <div class="form-group">
+                <label for="inputHash">Mata in hash:</label>
+                <input type="text" class="form-control" id="inputHash" name="inputHash" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Sök</button>
+        </form>
+
+        <div th:if="${passwordResult}">
+            <h4 class="mt-4">Resultat:</h4>
+            <p><strong>Lösenord:</strong> <span th:text="${passwordResult}"></span></p>
+        </div>
+
+        <a href="/" class="btn btn-secondary mt-4">Tillbaka till startsidan</a>
+    </main>
+    <footer class="text-center mt-4">
+        <p>&copy; 2024 Din Webbplats. Alla rättigheter förbehållna.</p>
+    </footer>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

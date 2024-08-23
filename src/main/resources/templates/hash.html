@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hash Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 50px;
+            max-width: 600px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="text-center">Hash Generator</h2>
+    <form th:action="@{/generate-hash}" method="post">
+        <div class="form-group">
+            <label for="inputText">Mata in text:</label>
+            <textarea class="form-control" id="inputText" name="inputText" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Generera Hash</button>
+    </form>
+
+    <div th:if="${hashResult}">
+        <h4 class="mt-4">Resultat:</h4>
+        <p><strong>MD5:</strong> <span th:text="${hashResult.md5}"></span></p>
+        <p><strong>SHA-256:</strong> <span th:text="${hashResult.sha256}"></span></p>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
