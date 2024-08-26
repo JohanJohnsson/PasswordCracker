@@ -38,7 +38,7 @@ public class HashController {
         if (password != null) {
             model.addAttribute("passwordResult", password);
         } else {
-            model.addAttribute("passwordResult", "Ingen matchande lösenord hittades.");
+            model.addAttribute("passwordResult", "Inget matchande lösenord hittades.");
         }
         return "search";
     }
