@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: rgba(219, 219, 219, 0.8)
         }
         .container {
             margin-top: 50px;
@@ -30,10 +30,10 @@
         <h2 class="text-center">Hash Generator</h2>
         <form th:action="@{/generate-hash}" method="post">
             <div class="form-group">
-                <label for="inputText">Mata in text:</label>
+                <label for="inputText">Mata in lösenord:</label>
                 <textarea class="form-control" id="inputText" name="inputText" rows="3" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Generera Hash</button>
+            <button type="submit" class="btn btn-info btn-block">Generera Hash</button>
         </form>
 
         <div th:if="${hashResult}">
@@ -43,10 +43,10 @@
         </div>
         
         <div class="text-center mt-4">
-            <a href="/search" class="btn btn-secondary">Sök Hash</a>
+            <a href="/search" class="btn btn-info">Sök Hash</a>
         </div>
 
-        <a href="/logout" class="btn btn-secondary mt-4">Logga ut</a>
+        <a href="/logout" class="btn btn-outline-danger mt-4">Logga ut</a>
     </main>
     <footer class="text-center mt-4">
         <p>&copy; 2024 PasswordCracker. Alla rättigheter förbehållna.</p>

@@ -16,7 +16,7 @@ import java.security.NoSuchAlgorithmException;
 
 @Controller
 public class HashController {
-        
+
     @GetMapping("/search")
     public String searchPage() {
         return "search";
@@ -85,5 +85,7 @@ public class HashController {
             throw new RuntimeException("Error calculating hash", e);
         }
     }
-    
+
 }
+
+
