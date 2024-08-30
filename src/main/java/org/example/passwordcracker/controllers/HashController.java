@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class HashController {
@@ -44,17 +46,33 @@ public class HashController {
     }
 
     private String findPasswordByHash(String inputHash) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/hashes.txt"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(":");
-                if (parts.length == 3) {
-                    String text = parts[0];
-                    String algorithm = parts[1];
-                    String hash = parts[2];
+        String filePath;
+        boolean isMd5 = inputHash.length() == 32;
+        
+        filePath = isMd5 ? "src/md5_hashes.txt" : "src/sha256_hashes.txt";
 
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            List<String> lines = new ArrayList<>();
+            String line;
+            
+            while ((line = reader.readLine()) != null) {
+                lines.add(line);
+            }
+            
+            int left = 0;
+            int right = lines.size() - 1;
+
+            while (left <= right) {
+                int mid = (left + right) / 2;
+                String[] parts = lines.get(mid).split(":");
+                if (parts.length == 3) {
+                    String hash = parts[0];
                     if (hash.equals(inputHash)) {
-                        return text;
+                        return parts[2];
+                    } else if (hash.compareTo(inputHash) < 0) {
+                        left = mid + 1;
+                    } else {
+                        right = mid - 1;
                     }
                 }
             }
@@ -85,7 +103,6 @@ public class HashController {
             throw new RuntimeException("Error calculating hash", e);
         }
     }
-
 }
 
 
