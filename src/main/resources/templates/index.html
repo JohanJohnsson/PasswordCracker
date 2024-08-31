@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body {
-            background-color: rgba(219, 219, 219, 0.8)
+            background-color: #1d1e22   
         }
         .container {
             margin-top: 50px;
@@ -16,39 +16,45 @@
         .form-group {
             margin-bottom: 20px;
         }
+
+        .nerko-one-regular {
+            font-family: "Nerko One", cursive;
+            font-weight: 400;
+            font-style: normal;
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <header class="text-center">
+    <header class="text-center text-light nerko-one-regular">
         <h1>Välkommen till PasswordCracker!</h1>
     </header>
     <main>
         <p></p>
         <p></p>
         
-        <h2 class="text-center">Hash Generator</h2>
+        <h2  class="text-center text-light nerko-one-regular">Hash Generator</h2>
         <form th:action="@{/generate-hash}" method="post">
             <div class="form-group">
-                <label for="inputText">Mata in lösenord:</label>
+                <label class="text-light nerko-one-regular" for="inputText">Mata in lösenord:</label>
                 <textarea class="form-control" id="inputText" name="inputText" rows="3" required></textarea>
             </div>
-            <button type="submit" class="btn btn-info btn-block">Generera Hash</button>
+            <button type="submit" class="btn btn-success btn-block nerko-one-regular">Generera Hash</button>
         </form>
 
         <div th:if="${hashResult}">
-            <h4 class="mt-4">Resultat:</h4>
-            <p><strong>MD5:</strong> <span th:text="${hashResult.md5}"></span></p>
-            <p><strong>SHA-256:</strong> <span th:text="${hashResult.sha256}"></span></p>
+            <h4 class="mt-4 text-light nerko-one-regular">Resultat:</h4>
+            <p><strong class="text-light">MD5:</strong> <span class="text-light" th:text="${hashResult.md5}"></span></p>
+            <p><strong class="text-light">SHA-256:</strong> <span class="text-light" th:text="${hashResult.sha256}"></span></p>
         </div>
         
-        <div class="text-center mt-4">
-            <a href="/search" class="btn btn-info">Sök Hash</a>
+        <div class="text-center mt-4 nerko-one-regular">
+            <a href="/search" class="btn btn-success">Sök Hash</a>
         </div>
 
-        <a href="/logout" class="btn btn-outline-danger mt-4">Logga ut</a>
+        <a href="/logout" class="btn btn-outline-danger mt-4 nerko-one-regular">Logga ut</a>
     </main>
-    <footer class="text-center mt-4">
+    <footer class="text-center mt-4 text-light">
         <p>&copy; 2024 PasswordCracker. Alla rättigheter förbehållna.</p>
     </footer>
 </div>

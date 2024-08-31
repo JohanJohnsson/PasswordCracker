@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #1d1e22;
         }
         .container {
             margin-top: 50px;
@@ -16,30 +16,35 @@
         .form-group {
             margin-bottom: 20px;
         }
+        .nerko-one-regular {
+            font-family: "Nerko One", cursive;
+            font-weight: 400;
+            font-style: normal;
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <header class="text-center">
+    <header class="text-center text-light nerko-one-regular">
         <h1>Sök Lösenord från Hash</h1>
     </header>
     <main>
         <form th:action="@{/search-hash}" method="post">
             <div class="form-group">
-                <label for="inputHash">Mata in hash:</label>
+                <label class="text-light nerko-one-regular" for="inputHash">Mata in hash:</label>
                 <input type="text" class="form-control" id="inputHash" name="inputHash" required>
             </div>
-            <button type="submit" class="btn btn-info btn-block">Sök</button>
+            <button type="submit" class="btn btn-success btn-block nerko-one-regular">Sök</button>
         </form>
 
         <div th:if="${passwordResult}">
-            <h4 class="mt-4">Resultat:</h4>
-            <p><strong>Lösenord:</strong> <span th:text="${passwordResult}"></span></p>
+            <h4 class="mt-4 text-light nerko-one-regular">Resultat:</h4>
+            <p><strong class="text-light nerko-one-regular">Lösenord:</strong> <span class="text-light" th:text="${passwordResult}"></span></p>
         </div>
 
-        <a href="/" class="btn btn-secondary mt-4">Tillbaka till startsidan</a>
+        <a href="/" class="btn btn-secondary mt-4 nerko-one-regular">Tillbaka till startsidan</a>
     </main>
-    <footer class="text-center mt-4">
+    <footer class="text-center mt-4 text-light">
         <p>&copy; 2024 PasswordCracker. Alla rättigheter förbehållna.</p>
     </footer>
 </div>
