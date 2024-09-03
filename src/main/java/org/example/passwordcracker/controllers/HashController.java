@@ -67,6 +67,8 @@ public class HashController {
                 String[] parts = lines.get(mid).split(":");
                 if (parts.length == 3) {
                     String hash = parts[0];
+                    //Skriver ut för att kolla om binary search utförs korrekt
+                    System.out.println("Kontrollerar hash: " + hash);
                     if (hash.equals(inputHash)) {
                         return parts[2];
                     } else if (hash.compareTo(inputHash) < 0) {
