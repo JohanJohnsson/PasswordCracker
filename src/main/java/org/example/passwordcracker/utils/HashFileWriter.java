@@ -1,23 +1,23 @@
 package org.example.passwordcracker.utils;
 
+import org.example.passwordcracker.service.HashService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Component
 public class HashFileWriter {
+    
+    private final HashService hashService;
+    
+    public HashFileWriter(HashService hashService) {
+        this.hashService = hashService;
+    }
 
     @Bean
     public CommandLineRunner generateHashFiles() {
@@ -31,8 +31,8 @@ public class HashFileWriter {
 
                 String entry;
                 while ((entry = reader.readLine()) != null) {
-                    String md5Hash = calculateHash(entry, "MD5");
-                    String sha256Hash = calculateHash(entry, "SHA-256");
+                    String md5Hash = hashService.hashString(entry, "MD5");
+                    String sha256Hash = hashService.hashString(entry, "SHA-256");
 
                     md5Hashes.add(String.format("%s:MD5:%s", md5Hash, entry));
                     sha256Hashes.add(String.format("%s:SHA-256:%s", sha256Hash, entry));
@@ -57,20 +57,7 @@ public class HashFileWriter {
             }
         };
     }
-
-    private String calculateHash(String input, String algorithm) {
-        try {
-            MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
-            byte[] hashBytes = messageDigest.digest(input.getBytes(StandardCharsets.UTF_8));
-            StringBuilder hashString = new StringBuilder();
-            for (byte b : hashBytes) {
-                hashString.append(String.format("%02x", b));
-            }
-            return hashString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Error calculating hash", e);
-        }
-    }
+    
 }
 
 
